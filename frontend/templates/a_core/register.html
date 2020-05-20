@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}register{% endblock title %}
+
+{% block main %}
+<a href="/">홈으로</a>
+<form method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button>register</button>
+</form>
+{% endblock main %}

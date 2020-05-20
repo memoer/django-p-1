@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}home{% endblock title %}
+
+{% block main %}
+home
+{% if user.is_authenticated %}
+<p>hello!!? {{user.username}}</p>
+<a href="/logout">로그아웃</a>
+<a href="/passwordChange">비밀번호 변경</a>
+{% else %}
+<a href="/login">로그인</a>
+<a href="/register">회원가입</a>
+{% endif %}
+{% endblock main %}
