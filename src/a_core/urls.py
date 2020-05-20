@@ -1,6 +1,13 @@
 from django.urls import path
 from django.views.generic.base import TemplateView
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import (
+    PasswordChangeView,
+    PasswordChangeDoneView,
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetConfirmView,
+    PasswordResetCompleteView,
+)
 from django.urls import reverse_lazy
 from .constants import urls_name
 from .views import (
@@ -22,11 +29,6 @@ urlpatterns = [
     ),
     path(
         "logout/",
-        # login_url 이 "/1" 이라서 localhost:8000/1/?next=/logout/ 으로 표시된다.
-        # 말 그대로 login을 하려는 url 이 어딘 지 표시해주는 것.
-        # login_required(
-        #     LogoutView.as_view(template_name="a_core/logout.html"), login_url="/1"
-        # ),
         CustomLogoutView.as_view(template_name="a_core/logout.html"),
         name=urls_name.LOGOUT,
     ),
@@ -35,7 +37,9 @@ urlpatterns = [
         "passwordChange/",
         PasswordChangeView.as_view(
             template_name="a_core/password_change.html",
-            success_url=reverse_lazy(f"A_CORE:PASSWORD_CHANGE_DONE"),
+            success_url=reverse_lazy(
+                f"{urls_name.APP_NAME}:{urls_name.PASSWORD_CHANGE_DONE}"
+            ),
         ),
         name=urls_name.PASSWORD_CHANGE,
     ),
@@ -45,6 +49,40 @@ urlpatterns = [
             template_name="a_core/password_change_done.html"
         ),
         name=urls_name.PASSWORD_CHANGE_DONE,
+    ),
+    path(
+        "passwordReset/",
+        PasswordResetView.as_view(
+            template_name="a_core/password_reset.html",
+            email_template_name="a_core/password_reset_email.html",
+            subject_template_name="a_core/password_reset_subject.txt",
+            success_url=reverse_lazy(
+                f"{urls_name.APP_NAME}:{urls_name.PASSWORD_RESET_DONE}"
+            ),
+        ),
+        name=urls_name.PASSWORD_RESET,
+    ),
+    path(
+        "passwordResetDone/",
+        PasswordResetDoneView.as_view(template_name="a_core/password_reset_done.html"),
+        name=urls_name.PASSWORD_RESET_DONE,
+    ),
+    path(
+        "passwordResetConfirm/<uidb64>/<token>/",
+        PasswordResetConfirmView.as_view(
+            template_name="a_core/password_reset_confirm.html",
+            success_url=reverse_lazy(
+                f"{urls_name.APP_NAME}:{urls_name.PASSWORD_RESET_COMPLETE}"
+            ),
+        ),
+        name=urls_name.PASSWORD_RESET_CONFIRM,
+    ),
+    path(
+        "passwordResetComplete/",
+        PasswordResetCompleteView.as_view(
+            template_name="a_core/password_reset_complete.html"
+        ),
+        name=urls_name.PASSWORD_RESET_COMPLETE,
     ),
     #
     path(

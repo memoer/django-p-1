@@ -3,10 +3,9 @@ from django.contrib.auth.views import (
     LogoutView,
 )
 from django.views.generic.edit import FormView
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
-from .lib import mixins
+from .lib import mixins, forms
 from .constants import urls_name
 
 
@@ -22,8 +21,8 @@ class CustomLogoutView(mixins.OnlyLoggedIn, LogoutView):
 
 class RegisterUser(mixins.OnlyLoggedOut, FormView):
     template_name = "a_core/register.html"
-    success_url = reverse_lazy(f"{urls_name.APP_NAME}{urls_name.AFTER_REGISTER}")
-    form_class = UserCreationForm
+    success_url = reverse_lazy(f"{urls_name.APP_NAME}:{urls_name.AFTER_REGISTER}")
+    form_class = forms.CustomUserCreationForm
 
     def form_valid(self, form):
         form.save()

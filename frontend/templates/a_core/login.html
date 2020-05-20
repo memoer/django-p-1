@@ -3,7 +3,7 @@
 {% block title %}login{% endblock title %}
 
 {% block main %}
-<a href="/">홈으로</a>
+<a href="{% url 'A_CORE:HOME' %}">홈으로</a>
 <form method="POST">
   {% csrf_token %}
   {{form.as_p}}
