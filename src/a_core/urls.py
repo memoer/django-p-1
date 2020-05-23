@@ -9,7 +9,7 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
 )
 from django.urls import reverse_lazy
-from .constants import urls_name
+from .constant import urls_name as name
 from .views import (
     RegisterUser,
     CustomLoginView,
@@ -17,38 +17,34 @@ from .views import (
 )
 
 
-app_name = urls_name.APP_NAME
+app_name = name.APP_NAME
 urlpatterns = [
-    path(
-        "", TemplateView.as_view(template_name="a_core/home.html"), name=urls_name.HOME
-    ),
+    path("", TemplateView.as_view(template_name="a_core/home.html"), name=name.HOME),
     path(
         "login/",
         CustomLoginView.as_view(template_name="a_core/login.html"),
-        name=urls_name.LOGIN,
+        name=name.LOGIN,
     ),
     path(
         "logout/",
         CustomLogoutView.as_view(template_name="a_core/logout.html"),
-        name=urls_name.LOGOUT,
+        name=name.LOGOUT,
     ),
-    path("register/", RegisterUser.as_view(), name=urls_name.REGISTER),
+    path("register/", RegisterUser.as_view(), name=name.REGISTER),
     path(
         "passwordChange/",
         PasswordChangeView.as_view(
             template_name="a_core/password_change.html",
-            success_url=reverse_lazy(
-                f"{urls_name.APP_NAME}:{urls_name.PASSWORD_CHANGE_DONE}"
-            ),
+            success_url=reverse_lazy(f"{name.APP_NAME}:{name.PASSWORD_CHANGE_DONE}"),
         ),
-        name=urls_name.PASSWORD_CHANGE,
+        name=name.PASSWORD_CHANGE,
     ),
     path(
         "passwordChangeDone/",
         PasswordChangeDoneView.as_view(
             template_name="a_core/password_change_done.html"
         ),
-        name=urls_name.PASSWORD_CHANGE_DONE,
+        name=name.PASSWORD_CHANGE_DONE,
     ),
     path(
         "passwordReset/",
@@ -56,48 +52,44 @@ urlpatterns = [
             template_name="a_core/password_reset.html",
             email_template_name="a_core/password_reset_email.html",
             subject_template_name="a_core/password_reset_subject.txt",
-            success_url=reverse_lazy(
-                f"{urls_name.APP_NAME}:{urls_name.PASSWORD_RESET_DONE}"
-            ),
+            success_url=reverse_lazy(f"{name.APP_NAME}:{name.PASSWORD_RESET_DONE}"),
         ),
-        name=urls_name.PASSWORD_RESET,
+        name=name.PASSWORD_RESET,
     ),
     path(
         "passwordResetDone/",
         PasswordResetDoneView.as_view(template_name="a_core/password_reset_done.html"),
-        name=urls_name.PASSWORD_RESET_DONE,
+        name=name.PASSWORD_RESET_DONE,
     ),
     path(
         "passwordResetConfirm/<uidb64>/<token>/",
         PasswordResetConfirmView.as_view(
             template_name="a_core/password_reset_confirm.html",
-            success_url=reverse_lazy(
-                f"{urls_name.APP_NAME}:{urls_name.PASSWORD_RESET_COMPLETE}"
-            ),
+            success_url=reverse_lazy(f"{name.APP_NAME}:{name.PASSWORD_RESET_COMPLETE}"),
         ),
-        name=urls_name.PASSWORD_RESET_CONFIRM,
+        name=name.PASSWORD_RESET_CONFIRM,
     ),
     path(
         "passwordResetComplete/",
         PasswordResetCompleteView.as_view(
             template_name="a_core/password_reset_complete.html"
         ),
-        name=urls_name.PASSWORD_RESET_COMPLETE,
+        name=name.PASSWORD_RESET_COMPLETE,
     ),
     #
     path(
         "after/login",
         TemplateView.as_view(template_name="a_core/after/login.html"),
-        name=urls_name.AFTER_LOGIN,
+        name=name.AFTER_LOGIN,
     ),
     path(
         "after/logout",
         TemplateView.as_view(template_name="a_core/after/logout.html"),
-        name=urls_name.AFTER_LOGOUT,
+        name=name.AFTER_LOGOUT,
     ),
     path(
         "after/register",
         TemplateView.as_view(template_name="a_core/after/register.html"),
-        name=urls_name.AFTER_REGISTER,
+        name=name.AFTER_REGISTER,
     ),
 ]

@@ -39,7 +39,11 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 THIRD_PARTY_APPS = []
-MY_APPS = ["a_core.apps.ACoreConfig"]
+MY_APPS = [
+    "a_core.apps.ACoreConfig",
+    "a_user.apps.AUserConfig",
+    "a_post.apps.APostConfig",
+]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
 MIDDLEWARE = [

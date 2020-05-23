@@ -6,7 +6,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
 from .lib import mixins, forms
-from .constants import urls_name
+from .constant import urls_name
 
 
 class CustomLoginView(mixins.OnlyLoggedOut, LoginView):
