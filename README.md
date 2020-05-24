@@ -11,5 +11,14 @@
 
 ### User
 
-- [ ] list
-- [ ] Detail
+- [x] List
+- [x] Detail
+
+### Post
+
+- [x] List
+- [x] Detail
+- [x] Create
+- [x] Update
+- [x] Delete
+- [ ] like

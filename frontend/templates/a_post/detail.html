@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}post detail{% endblock title %}
+
+{% block main %}
+<div>
+  <h1>title {{post.title}}</h1>
+  <h2>content</h2>
+  <p>{{post.content}}</p>
+  <p>createdBy : {{post.created_by}}</p>
+  <p>liked : {{post.liked}}</p>
+  {% if post.created_by.pk is user.pk %}
+  <a href="{% url 'A_POST:UPDATE' post.pk %}">update post</a>
+  <form action="{% url 'A_POST:DELETE' post.pk %}" method="POST">
+    {% csrf_token %}
+    <button>delete</button>
+  </form>
+  {% endif %}
+  <a href="{% url 'A_CORE:HOME' %}">go home</a>
+</div>
+{% endblock main %}

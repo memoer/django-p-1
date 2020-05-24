@@ -4,11 +4,14 @@
 
 {% block main %}
 home
+<a href="{% url 'A_USER:LIST' %}">SHOW USER LIST</a>
+<a href="{% url 'A_POST:LIST' %}">SHOW POST LIST</a>
 {% if user.is_authenticated %}
 <p>hello!!? {{user.username}}</p>
 <a href="{% url 'A_CORE:LOGOUT' %}">로그아웃</a>
 <a href="{% url 'A_CORE:PASSWORD_CHANGE' %}">비밀번호 변경</a>
 <a href="{% url 'A_CORE:PASSWORD_RESET' %}">password reset</a>
+<a href="{% url 'A_POST:CREATE' %}">CREATE POST</a>
 {% else %}
 <a href="{% url 'A_CORE:LOGIN' %}">로그인</a>
 <a href="{% url 'A_CORE:REGISTER' %}">회원가입</a>

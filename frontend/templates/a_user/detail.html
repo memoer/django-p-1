@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}USER_DETAIL{% endblock title %}
+
+{% block main %}
+<h1>username : {{user.username}}</h1>
+{% if user.email %}
+<p>email : {{user.email}}</p>
+{% endif %}
+<p>joined : {{user.date_joined}}</p>
+<button onClick="javascript:history.go(-1);">Previous Page</button>
+{% endblock main %}
